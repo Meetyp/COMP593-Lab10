@@ -8,14 +8,6 @@ import os
 
 POKE_API_URL = 'https://pokeapi.co/api/v2/pokemon/'
 
-def main():
-    # Test out the get_pokemon_into() function
-    # Use breakpoints to view returned dictionary
-    # poke_info = get_pokemon_info("Rockruff")
-    # get_pokemon_names()
-    dowload_pokemon_artwork(123, r'c:/temp')
-    return
-
 def get_pokemon_info(pokemon_name):
     """Gets information about a specified Pokemon from the PokeAPI.
 
@@ -110,6 +102,3 @@ def dowload_pokemon_artwork(pokemon_name, folder_path):
         return file_path
     
     return False
-
-if __name__ == '__main__':
-    main()
