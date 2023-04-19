@@ -3,15 +3,17 @@ Library for interacting with the PokeAPI.
 https://pokeapi.co/
 '''
 import requests
+import image_lib
+import os
 
-POKE_API_URL = 'https://pokeapi.co/api/v2/pokemon'
+POKE_API_URL = 'https://pokeapi.co/api/v2/pokemon/'
 
 def main():
     # Test out the get_pokemon_into() function
     # Use breakpoints to view returned dictionary
     # poke_info = get_pokemon_info("Rockruff")
-    get_pokemon_names()
-
+    # get_pokemon_names()
+    dowload_pokemon_artwork(123, r'c:/temp')
     return
 
 def get_pokemon_info(pokemon_name):
@@ -51,7 +53,6 @@ def get_pokemon_names(offset=0, limit=100000):
     query_params = {
         "limit" : limit,
         "offset" : offset
-
     }
 
     # Send GET requests for pokemon names
@@ -70,5 +71,27 @@ def get_pokemon_names(offset=0, limit=100000):
         print(f'Response code: {resp_msg.status_code} ({resp_msg.reason})')
         return
     
+def dowload_pokemon_artwork(pokemon_name, folder_path):
+    
+    poke_info = get_pokemon_info(pokemon_name)
+    if poke_info is None:
+        return False
+
+    poke_image_url = poke_info['sprites']['other']['official-artwork']['front_default']
+
+    image_data = image_lib.download_image(poke_image_url)
+    if image_data is None:
+        return False
+
+    # Determine the path at which to save the Image file
+    image_ext = poke_image_url.split('.')[-1]
+    file_name = f'{poke_info["name"]}.{image_ext}'
+    file_path = os.path.join(folder_path, file_name)
+
+    if image_lib.save_image_file(image_data, file_path):
+        return file_path
+    
+    return False
+
 if __name__ == '__main__':
     main()
