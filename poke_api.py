@@ -49,6 +49,15 @@ def get_pokemon_info(pokemon_name):
         return
     
 def get_pokemon_names(offset=0, limit=100000):
+    """Get all the Pokemon names from the PokeApi
+
+    Args:
+        offset (int, optional): Starting point of the API results. Defaults to 0.
+        limit (int, optional): The maximum number of results that will be returned by the API. Defaults to 100000.
+
+    Returns:
+        list: List of pokemon names if successful Otherwise None
+    """
 
     query_params = {
         "limit" : limit,
@@ -72,6 +81,15 @@ def get_pokemon_names(offset=0, limit=100000):
         return
     
 def dowload_pokemon_artwork(pokemon_name, folder_path):
+    """Get the pokemon artwork from the pokemon information we get in get_poke_info function
+
+    Args:
+        pokemon_name (str): Name of the Pokemon
+        folder_path (str): Path of the folder to store pokemon artwork
+
+    Returns:
+        str: Path of the pokemon artwork if successful Otherwise False
+    """
     
     poke_info = get_pokemon_info(pokemon_name)
     if poke_info is None:

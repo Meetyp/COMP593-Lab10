@@ -25,7 +25,7 @@ root.minsize(500, 600)
 icon_path = os.path.join(script_dir, 'Poke-Ball.ico')
 root.iconbitmap(icon_path)
 
-# Set the Taskbar and window icon
+# Set the Taskbar icon
 app_id = 'COMP593.PokeImageViewer'
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
 
